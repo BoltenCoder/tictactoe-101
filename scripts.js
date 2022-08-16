@@ -5,6 +5,7 @@ let board = [
   ["", "", ""],
   ["", "", ""]
 ]
+let spacesFilled = 0
 
 // this "handleClick" function is called when a box is clicked. Here, "element" will hold the same value as "this" does in the HTML. 
 // "this" is a special word in JS but "element" could have been "thing" or "el" or whatever we wanted it to be as long as we use it again in the "console.log" statement
@@ -33,6 +34,9 @@ const addMarker = (id) => {
   const row = parseInt(id.charAt(0))
   const column = parseInt(id.charAt(1))
   board[row][column] = currentMarker
+  if (spacesFilled < 10) {
+    spacesFilled = spacesFilled + 1
+  }
   checkForWin()
 }
 
@@ -45,8 +49,8 @@ const changeMarker = () => {
   } else {
     currentMarker = "X"
   }
-  const youWon = document.getElementById('you-won')
-  youWon.innerHTML = `<div id="you-won">[${currentMarker}] Click a space.</hdiv>`
+  const youWon = document.getElementById('information')
+  youWon.innerHTML = `<div id="information">[${currentMarker}] Click a space.</hdiv>`
 }
 
 // This "resetBoard" function is called when the user clicks on the "Restart" button.
@@ -57,15 +61,12 @@ const resetBoard = () => {
   
   currentMarker = "X"
   const squares = document.getElementsByTagName("TD")
-  board[0][0] = null
-  board[0][1] = null
-  board[0][2] = null
-  board[1][0] = null
-  board[1][1] = null
-  board[1][2] = null
-  board[2][0] = null
-  board[2][1] = null
-  board[2][2] = null
+  for (i=0; i <= 2; i++) {
+    board[i][0] = null
+    board[i][1] = null
+    board[i][2] = null
+  }
+  spacesFilled = 0
   
   // loops over the HTML Collection of TDs and clears out the Xs and Os
   for (i=0; i < squares.length; i++) {
@@ -76,16 +77,19 @@ const resetBoard = () => {
     // sets the innerHTML to null to replace the "X" or "O"
     squares[i].innerHTML = null
   
-    const youWon = document.getElementById('you-won')
-    youWon.innerHTML = `<div id="you-won">[X] Game Reset!</hdiv>`
+    const youWon = document.getElementById('information')
+    youWon.innerHTML = `<div id="information">[X] Game Reset!</hdiv>`
   }  
 }
 
 const checkForWin = () => {
   console.log("checkForWin() has been run")
   if (horizontalWin() || verticalWin() || diagonalWin()) {
-    const youWon = document.getElementById('you-won')
-    youWon.innerHTML = `<div id="you-won">[${currentMarker}] You won!</div>`
+    const youWon = document.getElementById('information')
+    youWon.innerHTML = `<div id="information">[${currentMarker}] You won!</div>`
+  } else if (spacesFilled >=9) {
+    const youWon = document.getElementById('information')
+    youWon.innerHTML = `<div id="information">Cat game, no one wins :|</div>`
   } else {
     changeMarker()
   }

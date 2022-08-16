@@ -1,3 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  box-sizing:border-box;
+}
+
+a {
+    width:150px;
+    height:40px;
+    margin:30px;
+    
+
+    text-transform: uppercase;
+    text-align: center;
+    font-style: italic;
+    font-size:1.7rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.1rem;
+    
+    background-color: #050404;
+    color:white;
+    
+
+    cursor:alias;
+    position:relative;
+    z-index:3;
+  }
+
+a::before {
+    content:'';
+    position:absolute;
+    width:135px;
+    height:40px;
+   
+    top:0;
+    left:0;
+    
+    transition: .5s linear; /* Defines how long the button effect will take place for. */
+    
+    
+    z-index: -2;
+}
+
+
+a::after {
+    content:'';
+    position:absolute;
+    background-color: #020303;
+    
+    width:135px;
+    height:40px;
+
+    top:-2px;
+    left:-2px;
+    z-index: -1;
+}
+
+/* hover effect */
+
+a:hover::before
+{
+  filter:blur(5px);
+  
+}
+
+a:hover::after
+{
+  border: 1px solid red;
+}
+
+.button:hover::before
+{
+  background:linear-gradient(45deg, #ff0707, #ff920c,#ffee00);
+  transform: rotate(-5deg);
+}
+/* END of button highlight code */
+
+
+
 body{
   background-image: url(https://wallpaperaccess.com/full/343289.jpg);
   color: white;
@@ -5,7 +85,7 @@ body{
 
 .jumbotron {
   margin: 5% auto;
-  margin-left: 43%;
+  text-align: center;
 }
 
 td {
